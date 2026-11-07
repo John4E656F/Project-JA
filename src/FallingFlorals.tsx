@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import './falling-florals.css';
 
 const COUNT = 18;
 const random = (min: number, max: number) => min + Math.random() * (max - min);

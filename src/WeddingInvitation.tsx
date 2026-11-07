@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { createRoot } from 'react-dom/client';
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
 import { EnvelopeIntro } from './EnvelopeIntro';
 import { FallingFlorals } from './FallingFlorals';
 import { wedding } from './content';
 import { downloadCalendar, googleCalendarUrl } from './calendar';
-import './styles.css';
 
 function Floral({ className = '' }: { className?: string }) { return <img className={`floral ${className}`} src="/florals/rose-corner.webp" alt="" aria-hidden="true" />; }
 
@@ -21,10 +21,10 @@ function SectionHeading({ overline, title }: { overline: string; title: string }
 
 function Hero() { return <section className="hero" id="invitation"><Floral className="hero-floral-left"/><Floral className="hero-floral-right"/><div className="hero-border"><div className="hero-content reveal"><span className="eyebrow">Wedding Ceremony & Reception</span><div className="hero-names"><h2>{wedding.groom}</h2><span className="amp">&</span><h2>{wedding.bride}</h2></div><span className="fine-rule"/><p className="hero-script">We're getting married!</p><p className="hero-message">“{wedding.message}”</p><div className="hero-event"><span>{wedding.date}</span><i aria-hidden="true">✦</i><span>{wedding.time}</span></div><p className="hero-caption">Wedding Ceremony & Reception</p></div></div><div className="scroll-cue">SCROLL TO DISCOVER <span>↓</span></div></section>; }
 
-function Countdown() {
+function Countdown({ initialNow }: { initialNow: number }) {
   const target = new Date(wedding.startISO).getTime();
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => { const id = window.setInterval(() => setNow(Date.now()), 1000); return () => window.clearInterval(id); }, []);
+  const [now, setNow] = useState(initialNow);
+  useEffect(() => { setNow(Date.now()); const id = window.setInterval(() => setNow(Date.now()), 1000); return () => window.clearInterval(id); }, []);
   const left = Math.max(0, Math.floor((target - now) / 1000));
   const units = [{ label: 'Days', value: Math.floor(left / 86400) }, { label: 'Hours', value: Math.floor(left / 3600) % 24 }, { label: 'Minutes', value: Math.floor(left / 60) % 60 }, { label: 'Seconds', value: left % 60 }];
   return <section className="countdown section-pad"><SectionHeading overline="January 1, 2027" title="Counting Down to Our Forever"/>{left === 0 ? <p className="today-message">Today's the Day! We're Getting Married!</p> : <div className="count-grid reveal" role="timer" aria-label="Time until the wedding">{units.map(unit => <div className="count-unit" key={unit.label}><strong>{String(unit.value).padStart(2, '0')}</strong><span>{unit.label}</span></div>)}</div>}<p className="section-note">January 1, 2027 · 9:00 AM Philippine Standard Time</p></section>;
@@ -63,11 +63,9 @@ function MusicController() {
   return <><audio ref={audio} src={wedding.musicSrc} loop preload="none" onError={() => setFailed(true)} onEnded={() => setPlaying(false)}/><button className="music-control" onClick={toggle} aria-label={playing ? 'Pause background music' : 'Play background music'} aria-pressed={playing}>{playing ? '♫ Pause' : '♫ Play music'}</button></>;
 }
 
-function App() {
+export function WeddingInvitation({ initialNow }: { initialNow: number }) {
   const [opened, setOpened] = useState(false);
   useReveal();
   useEffect(() => { document.body.style.overflow = opened ? '' : 'hidden'; return () => { document.body.style.overflow = ''; }; }, [opened]);
-  return <>{!opened && <EnvelopeIntro onFinish={() => setOpened(true)}/>}<main aria-hidden={!opened} inert={!opened}><Hero/><Countdown/><Details/><DressCode/><Gallery/><Reminders/><PhotographyNote/><Closing/></main>{opened && <FallingFlorals/>}{opened && <MusicController/>}</>;
+  return <>{!opened && <EnvelopeIntro onFinish={() => setOpened(true)}/>}<main aria-hidden={!opened} inert={!opened}><Hero/><Countdown initialNow={initialNow}/><Details/><DressCode/><Gallery/><Reminders/><PhotographyNote/><Closing/></main>{opened && <FallingFlorals/>}{opened && <MusicController/>}</>;
 }
-
-createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>);

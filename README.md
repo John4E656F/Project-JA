@@ -1,24 +1,24 @@
 # John Mark & Ailyn Grace — Wedding Invitation
 
-A mobile-first animated invitation for January 1, 2027. Built with React, TypeScript, Vite, a GSAP opening timeline, and original watercolor floral artwork.
+A mobile-first animated invitation for January 1, 2027. Built with Next.js, React, TypeScript, pnpm, a GSAP opening timeline, and original watercolor floral artwork.
 
 ## Run locally
 
-Requires Node.js 20.19+ or 22.12+.
+Requires Node.js 20.9+ and pnpm 12.16.1 (pinned in `package.json`). Use Corepack if your global pnpm is older.
 
 ```bash
-npm install
-npm run dev
+corepack pnpm install
+corepack pnpm dev
 ```
 
-Open the local URL printed by Vite. For a production build:
+Open the local URL printed by Next.js (normally `http://localhost:3000`). For a production build:
 
 ```bash
-npm run build
-npm run preview
+corepack pnpm build
+corepack pnpm start
 ```
 
-Deploy the contents of `dist/` to any static host. No backend is needed.
+Deploy the Next.js app to a host that supports Next.js, or run `corepack pnpm start` after building.
 
 ## Update content and assets
 

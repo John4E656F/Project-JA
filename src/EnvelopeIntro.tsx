@@ -1,7 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { wedding } from './content';
-import './envelope.css';
 
 type Props = { onFinish: () => void };
 
@@ -9,14 +8,6 @@ const random = (min: number, max: number) => min + Math.random() * (max - min);
 
 export function EnvelopeIntro({ onFinish }: Props) {
   const [opening, setOpening] = useState(false);
-  const [fallingDetails] = useState(() => Array.from({ length: 16 }, () => ({
-    left: `${random(4, 96)}%`,
-    top: `${random(-18, 8)}%`,
-    drift: random(-65, 65),
-    turn: random(-190, 190),
-    duration: random(1.35, 1.7),
-    delay: random(0, 0.25),
-  })));
   const stageRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -34,6 +25,15 @@ export function EnvelopeIntro({ onFinish }: Props) {
     const prompt = find('.pin-prompt');
     const wash = intro.querySelector<HTMLElement>('.pin-transition-wash')!;
     const details = Array.from(intro.querySelectorAll<HTMLElement>('.pin-falling-detail'));
+    const fallingDetails = details.map(detail => {
+      gsap.set(detail, { left: `${random(4, 96)}%`, top: `${random(-18, 8)}%` });
+      return {
+        drift: random(-65, 65),
+        turn: random(-190, 190),
+        duration: random(1.35, 1.7),
+        delay: random(0, 0.25),
+      };
+    });
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     gsap.set(seal, { xPercent: -50, yPercent: -50, opacity: 1, scale: 1, rotation: 0 });
@@ -82,7 +82,7 @@ export function EnvelopeIntro({ onFinish }: Props) {
     return () => {
       timeline.kill();
     };
-  }, [fallingDetails, opening, onFinish]);
+  }, [opening, onFinish]);
 
   return (
     <div className='pin-intro' role='dialog' aria-modal='true' aria-label='Wedding invitation'>
@@ -113,10 +113,9 @@ export function EnvelopeIntro({ onFinish }: Props) {
       </div>
       <div className='pin-transition-wash' aria-hidden='true' />
       <div className='pin-falling-details' aria-hidden='true'>
-        {fallingDetails.map((detail, index) => (
+        {Array.from({ length: 16 }, (_, index) => (
           <span
             className={`pin-falling-detail ${index % 3 === 0 ? 'pin-falling-flower' : 'pin-falling-petal'}`}
-            style={{ left: detail.left, top: detail.top }}
             key={index}
           />
         ))}
