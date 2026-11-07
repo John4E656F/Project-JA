@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//John Mark and Ailyn Grace//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:john-mark-ailyn-grace-wedding-20270101@invitation.local
+DTSTAMP:20261107T151305Z
+DTSTART:20270101T010000Z
+DTEND:20270101T070000Z
+SUMMARY:John Mark & Ailyn Grace's Wedding
+LOCATION:DNM Catering and Events\, Muñoz West\, Roxas\, Isabela\, Philippi
+ nes
+DESCRIPTION:Wedding Ceremony & Reception. Get directions: https://maps.app.
+ goo.gl/Q722oL141E4DA7fw7
+END:VEVENT
+END:VCALENDAR
