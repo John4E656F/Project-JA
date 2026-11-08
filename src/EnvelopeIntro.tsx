@@ -37,7 +37,7 @@ export function EnvelopeIntro({ onFinish }: Props) {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     gsap.set(seal, { xPercent: -50, yPercent: -50, opacity: 1, scale: 1, rotation: 0 });
-    gsap.set([flap, left, right, bottom], { rotationX: 0, rotationY: 0, opacity: 1 });
+    gsap.set([flap, left, right, bottom], { rotationX: 0, rotationY: 0, opacity: 1, transformPerspective: 1400 });
     gsap.set(inside, { opacity: 0 });
     gsap.set(letter, { yPercent: 0, scale: 1 });
     gsap.set(wash, { opacity: 0 });
@@ -48,21 +48,20 @@ export function EnvelopeIntro({ onFinish }: Props) {
     timeline
       .to(prompt, { opacity: 0, duration: 0.25 }, 0)
       .to(seal, { scale: 0.73, rotation: -10, y: -15, opacity: 0, duration: 0.38, ease: 'power2.inOut' }, 0.06)
-      .to(flap, { rotationX: -180, duration: 0.72, ease: 'power3.inOut' }, 0.28)
-      .to(inside, { opacity: 1, duration: 0.45 }, 0.45)
-      .set(flap, { zIndex: 2 }, 0.98)
-      .to(flap, { opacity: 0, duration: 0.12 }, 0.98)
-      .to(left, { rotationY: -175, duration: 0.6, ease: 'power2.inOut' }, 1.05)
-      .to(right, { rotationY: 175, duration: 0.6, ease: 'power2.inOut' }, 1.05)
-      .to(bottom, { rotationX: -175, duration: 0.62, ease: 'power2.inOut' }, 1.68)
-      .set(letter, { zIndex: 9 }, 2.3)
-      .to(letter, { scale: 1.22, duration: 0.7, ease: 'power2.inOut' }, 2.32)
-      .set(stage, { overflow: 'visible' }, 2.98)
-      .to(letter, { scale: coverScale, duration: 0.82, ease: 'power2.inOut' }, 3.02)
-      .to(wash, { opacity: 1, duration: 0.55, ease: 'sine.inOut' }, 3.18)
-      .to(stage, { opacity: 0, duration: 0.4 }, 3.4)
-      .to(intro, { backgroundColor: 'rgba(246, 241, 236, 0)', duration: 1, ease: 'sine.inOut' }, 3.83)
-      .to(wash, { opacity: 0, duration: 1, ease: 'sine.inOut' }, 3.83);
+      .set(stage, { overflow: 'visible' }, 0.25)
+      .to(flap, { rotationX: -168, duration: 0.88, ease: 'power2.inOut' }, 0.32)
+      .to(inside, { opacity: 1, duration: 0.5 }, 0.55)
+      .set(flap, { zIndex: 2 }, 1.2)
+      .to(left, { rotationY: -168, duration: 0.75, ease: 'power2.inOut' }, 1.23)
+      .to(right, { rotationY: 168, duration: 0.75, ease: 'power2.inOut' }, 1.23)
+      .to(bottom, { rotationX: -168, duration: 0.72, ease: 'power2.inOut' }, 2.02)
+      .set(letter, { zIndex: 9 }, 2.74)
+      .to(letter, { scale: 1.22, y: -12, duration: 0.72, ease: 'power2.inOut' }, 2.76)
+      .to(letter, { scale: coverScale, duration: 0.85, ease: 'power2.inOut' }, 3.48)
+      .to(wash, { opacity: 1, duration: 0.55, ease: 'sine.inOut' }, 3.65)
+      .to(stage, { opacity: 0, duration: 0.4 }, 3.88)
+      .to(intro, { backgroundColor: 'rgba(246, 241, 236, 0)', duration: 1, ease: 'sine.inOut' }, 4.28)
+      .to(wash, { opacity: 0, duration: 1, ease: 'sine.inOut' }, 4.28);
     details.forEach((detail, index) => {
       const config = fallingDetails[index];
       timeline.to(detail, {
@@ -76,7 +75,7 @@ export function EnvelopeIntro({ onFinish }: Props) {
         rotation: config.turn,
         ease: 'sine.inOut',
         duration: config.duration,
-      }, 3.12 + config.delay);
+      }, 3.62 + config.delay);
     });
     if (reduced) timeline.timeScale(1.25);
     return () => {
@@ -87,11 +86,9 @@ export function EnvelopeIntro({ onFinish }: Props) {
   return (
     <div className='pin-intro' role='dialog' aria-modal='true' aria-label='Wedding invitation'>
       <div className='pin-stage' ref={stageRef}>
-        <div className='pin-inside' aria-hidden='true'>
-          <img src='/florals/rose-corner.webp' alt='' />
-        </div>
         <button className='pin-envelope' type='button' onClick={() => setOpening(true)} disabled={opening} aria-label='Open the wedding invitation'>
           <span className='pin-base' />
+          <span className='pin-inside' />
           <span className='pin-letter'>
             <span className='pin-letter-border' />
             <span className='pin-letter-overline'>You're Invited</span>
@@ -99,10 +96,10 @@ export function EnvelopeIntro({ onFinish }: Props) {
             <span className='pin-letter-rule' />
             <span className='pin-letter-date'>January 1, 2027</span>
           </span>
-          <span className='pin-fold pin-left' />
-          <span className='pin-fold pin-right' />
-          <span className='pin-fold pin-bottom' />
-          <span className='pin-fold pin-flap' />
+          <span className='pin-fold pin-left'><span className='pin-fold-front' /><span className='pin-fold-back' /></span>
+          <span className='pin-fold pin-right'><span className='pin-fold-front' /><span className='pin-fold-back' /></span>
+          <span className='pin-fold pin-bottom'><span className='pin-fold-front' /><span className='pin-fold-back' /></span>
+          <span className='pin-fold pin-flap'><span className='pin-fold-front' /><span className='pin-fold-back' /></span>
           <span className='pin-seal'>
             <img src='/florals/rose-wax-seal.webp' alt='' />
           </span>
