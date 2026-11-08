@@ -6,7 +6,6 @@ export function Closing() {
     <footer
       className={`relative grid min-h-[630px] place-items-center bg-burgundy text-center text-[#fff8f2] sm:min-h-[600px] ${sectionPadding}`}
     >
-      <Floral className="-top-[110px] -left-[150px] w-[clamp(280px,45vw,540px)] opacity-90 sm:-top-[90px] sm:-left-[100px]" />
       <Floral className="-right-[150px] -bottom-[110px] w-[clamp(280px,45vw,540px)] rotate-180 opacity-90 sm:-right-[120px]" />
       <div className="reveal relative z-10">
         <span className={`${eyebrow} !text-[#e2b7aa]`}>

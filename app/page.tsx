@@ -7,17 +7,32 @@ import { DressCode } from "../src/components/sections/DressCode";
 import { Reminders } from "../src/components/sections/Reminders";
 import { PhotographyNote } from "../src/components/sections/PhotographyNote";
 import { Closing } from "../src/components/sections/Closing";
+import { FloralDivider } from "../src/components/FloralDivider";
+import { wedding } from "../src/lib/wedding";
 
 export default function Page() {
   return (
     <InvitationExperience>
       <Hero />
+      <FloralDivider side="right" />
       <Countdown />
+      <FloralDivider side="left" />
       <Details />
+      <FloralDivider side="right" />
       <DressCode />
-      <Gallery />
+      {wedding.photos.length > 0 ? (
+        <>
+          <FloralDivider side="left" />
+          <Gallery />
+          <FloralDivider side="right" />
+        </>
+      ) : (
+        <FloralDivider side="left" />
+      )}
       <Reminders />
+      <FloralDivider side="right" />
       <PhotographyNote />
+      <FloralDivider side="left" />
       <Closing />
     </InvitationExperience>
   );

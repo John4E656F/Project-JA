@@ -8,7 +8,6 @@ export function Hero() {
       className="relative flex min-h-svh items-center justify-center bg-[radial-gradient(ellipse_at_center,#fffdf8,#fbf6f0_72%,#f4e8e1)] px-[17px] pt-6 pb-[60px] text-center sm:px-5 sm:pt-10"
     >
       <Floral className="-top-[50px] -left-[130px] w-[240px] opacity-80 sm:-top-[62px] sm:-left-[85px] sm:w-[clamp(245px,35vw,450px)]" />
-      <Floral className="-right-[130px] -bottom-[60px] w-[240px] rotate-180 opacity-80 sm:-right-[90px] sm:-bottom-[70px] sm:w-[clamp(245px,35vw,450px)]" />
       <div className="relative z-10 w-full max-w-[720px] border border-[#dfc7b4] p-[7px] sm:p-3">
         <div className="reveal border border-[#e9d7c8] px-[18px] pt-14 pb-11 sm:px-7 sm:pt-[clamp(55px,10vw,95px)] sm:pb-[58px]">
           <span className={eyebrow}>Wedding Ceremony & Reception</span>

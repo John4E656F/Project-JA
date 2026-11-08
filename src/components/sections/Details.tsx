@@ -1,12 +1,11 @@
 import { wedding } from "../../lib/wedding";
 import { googleCalendarUrl } from "../../lib/calendar";
 import { CalendarDownloadButton } from "../CalendarDownloadButton";
-import { Floral, action, eyebrow, sectionPadding } from "./SectionUI";
+import { action, eyebrow, sectionPadding } from "./SectionUI";
 
 export function Details() {
   return (
     <section className={`relative bg-[#f7eee8] text-center ${sectionPadding}`}>
-      <Floral className="-top-[70px] -right-[100px] w-[350px] rotate-[98deg] opacity-65" />
       <div className="reveal relative mx-auto max-w-[680px] border border-[#e2cdbf] bg-[#fffaf5] px-[18px] py-[55px] shadow-[0_16px_50px_#6f3e3e10] before:pointer-events-none before:absolute before:inset-[7px] before:border before:border-[#eadbd0] sm:px-6 sm:py-[65px] sm:before:inset-[10px]">
         <span className={eyebrow}>The celebration</span>
         <h2 className="font-display mx-auto my-6 text-[clamp(3rem,8vw,4.5rem)] leading-[0.95] font-medium text-burgundy">
