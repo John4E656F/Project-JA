@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 const COUNT = 18;
 const random = (min: number, max: number) => min + Math.random() * (max - min);
@@ -12,7 +12,9 @@ export function FallingFlorals() {
     if (!layer) return;
 
     const pieces = Array.from(layer.children) as HTMLElement[];
-    const animations: Array<gsap.core.Animation | undefined> = new Array(pieces.length);
+    const animations: Array<gsap.core.Animation | undefined> = new Array(
+      pieces.length,
+    );
     let active = true;
 
     const schedule = (index: number, delay: number) => {
@@ -24,7 +26,7 @@ export function FallingFlorals() {
       const piece = pieces[index];
       const flower = index % 3 !== 2;
       const duration = random(7, 11);
-      const startingX = random(4, 96) * window.innerWidth / 100;
+      const startingX = (random(4, 96) * window.innerWidth) / 100;
       const drift = random(-100, 100);
       const turn = random(-220, 220);
       gsap.set(piece, {
@@ -36,8 +38,19 @@ export function FallingFlorals() {
         scale: random(0.72, 1.3),
         opacity: 0,
       });
-      animations[index] = gsap.timeline({ onComplete: () => schedule(index, random(1.5, 5.5)) })
-        .to(piece, { x: drift, y: window.innerHeight + 65, rotation: turn, duration, ease: 'none' }, 0)
+      animations[index] = gsap
+        .timeline({ onComplete: () => schedule(index, random(1.5, 5.5)) })
+        .to(
+          piece,
+          {
+            x: drift,
+            y: window.innerHeight + 65,
+            rotation: turn,
+            duration,
+            ease: "none",
+          },
+          0,
+        )
         .to(piece, { opacity: flower ? 0.5 : 0.36, duration: 1.2 }, 0)
         .to(piece, { opacity: 0, duration: 1.5 }, duration - 1.5);
     };
@@ -45,14 +58,21 @@ export function FallingFlorals() {
     pieces.forEach((_, index) => schedule(index, random(0.1, 7)));
     return () => {
       active = false;
-      animations.forEach(animation => animation?.kill());
+      animations.forEach((animation) => animation?.kill());
     };
   }, []);
 
   return (
-    <div className='falling-florals' ref={layerRef} aria-hidden='true'>
+    <div
+      className="pointer-events-none fixed inset-0 z-10 overflow-hidden"
+      ref={layerRef}
+      aria-hidden="true"
+    >
       {Array.from({ length: COUNT }, (_, index) => (
-        <span className={`falling-floral ${index % 3 !== 2 ? 'falling-floral-flower' : 'falling-floral-petal'}`} key={index} />
+        <span
+          className={`absolute -top-8 block opacity-0 will-change-transform [filter:drop-shadow(0_2px_2px_#87474d1c)] ${index % 3 !== 2 ? "falling-floral-flower" : "falling-floral-petal"}`}
+          key={index}
+        />
       ))}
     </div>
   );

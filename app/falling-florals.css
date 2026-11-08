@@ -1,0 +1,17 @@
+.falling-floral-flower {
+  width: 18px;
+  height: 18px;
+  background:
+    radial-gradient(circle at center, #d2a969 0 15%, transparent 19%),
+    radial-gradient(ellipse 27% 39% at 50% 19%, #efc8c3 92%, transparent 100%),
+    radial-gradient(ellipse 27% 39% at 79% 41%, #efc8c3 92%, transparent 100%),
+    radial-gradient(ellipse 27% 39% at 68% 80%, #efc8c3 92%, transparent 100%),
+    radial-gradient(ellipse 27% 39% at 30% 80%, #efc8c3 92%, transparent 100%),
+    radial-gradient(ellipse 27% 39% at 21% 41%, #efc8c3 92%, transparent 100%);
+}
+.falling-floral-petal {
+  width: 11px;
+  height: 16px;
+  border-radius: 80% 10% 72% 18%;
+  background: linear-gradient(135deg, #f2d1c9, #bd838e);
+}
