@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { EnvelopeIntro } from "./EnvelopeIntro";
 import { FallingFlorals } from "./FallingFlorals";
+import { FloralOverlay } from "./FloralOverlay";
 import { MusicController } from "./MusicController";
 
 function useReveal() {
@@ -36,8 +37,13 @@ export function InvitationExperience({ children }: { children: ReactNode }) {
   return (
     <>
       {!opened && <EnvelopeIntro onFinish={finishOpening} />}
-      <main className="overflow-x-clip" aria-hidden={!opened} inert={!opened}>
+      <main
+        className="relative overflow-x-clip"
+        aria-hidden={!opened}
+        inert={!opened}
+      >
         {children}
+        <FloralOverlay />
       </main>
       {opened && <FallingFlorals />}
       {opened && <MusicController />}
