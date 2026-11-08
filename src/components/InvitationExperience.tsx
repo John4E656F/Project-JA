@@ -36,7 +36,7 @@ export function InvitationExperience({ children }: { children: ReactNode }) {
   return (
     <>
       {!opened && <EnvelopeIntro onFinish={finishOpening} />}
-      <main className="overflow-hidden" aria-hidden={!opened} inert={!opened}>
+      <main className="overflow-x-clip" aria-hidden={!opened} inert={!opened}>
         {children}
       </main>
       {opened && <FallingFlorals />}

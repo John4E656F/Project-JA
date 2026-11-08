@@ -5,7 +5,7 @@ export function Hero() {
   return (
     <section
       id="invitation"
-      className="relative flex min-h-svh items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,#fffdf8,#fbf6f0_72%,#f4e8e1)] px-[17px] pt-6 pb-[60px] text-center sm:px-5 sm:pt-10"
+      className="relative flex min-h-svh items-center justify-center bg-[radial-gradient(ellipse_at_center,#fffdf8,#fbf6f0_72%,#f4e8e1)] px-[17px] pt-6 pb-[60px] text-center sm:px-5 sm:pt-10"
     >
       <Floral className="-top-[50px] -left-[130px] w-[240px] opacity-80 sm:-top-[62px] sm:-left-[85px] sm:w-[clamp(245px,35vw,450px)]" />
       <Floral className="-right-[130px] -bottom-[60px] w-[240px] rotate-180 opacity-80 sm:-right-[90px] sm:-bottom-[70px] sm:w-[clamp(245px,35vw,450px)]" />

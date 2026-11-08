@@ -8,7 +8,7 @@ export const action =
 export function Floral({ className = "" }: { className?: string }) {
   return (
     <img
-      className={`pointer-events-none absolute block select-none ${className}`}
+      className={`pointer-events-none absolute z-30 block select-none ${className}`}
       src="/florals/rose-corner.webp"
       alt=""
       aria-hidden="true"
