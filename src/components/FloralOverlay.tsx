@@ -2,7 +2,11 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 
-type Flower = { top: number; side: "left" | "right" };
+type Flower = {
+  top: number;
+  side: "left" | "right";
+  shape?: "corner-up-left";
+};
 
 export function FloralOverlay() {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -23,6 +27,7 @@ export function FloralOverlay() {
           Array.from(markers, (marker) => ({
             top: marker.getBoundingClientRect().top - mainTop,
             side: marker.dataset.floralSide as Flower["side"],
+            shape: marker.dataset.floralShape as Flower["shape"],
           })),
         );
       });
@@ -48,8 +53,16 @@ export function FloralOverlay() {
       className="pointer-events-none absolute inset-0 z-40"
       aria-hidden="true"
     >
-      {flowers.map(({ top, side }, index) =>
-        side === "right" ? (
+      {flowers.map(({ top, side, shape }, index) =>
+        shape === "corner-up-left" ? (
+          <img
+            key={index}
+            src="/florals/rose-corner.webp"
+            alt=""
+            style={{ top }}
+            className="absolute right-0 w-[280px] max-w-none -translate-y-[82%] rotate-180 select-none sm:w-[clamp(320px,36vw,440px)]"
+          />
+        ) : side === "right" ? (
           <img
             key={index}
             src="/florals/rose-vertical.png"

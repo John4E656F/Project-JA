@@ -14,7 +14,7 @@ export default function Page() {
   return (
     <InvitationExperience>
       <Hero />
-      <FloralDivider side="right" />
+      <FloralDivider side="right" shape="corner-up-left" />
       <Countdown />
       <FloralDivider side="left" />
       <Details />
