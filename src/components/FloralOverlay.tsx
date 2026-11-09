@@ -48,19 +48,25 @@ export function FloralOverlay() {
       className="pointer-events-none absolute inset-0 z-40"
       aria-hidden="true"
     >
-      {flowers.map(({ top, side }, index) => (
-        <img
-          key={index}
-          src="/florals/rose-corner.webp"
-          alt=""
-          style={{ top }}
-          className={`absolute w-[250px] max-w-none -translate-y-1/2 select-none sm:w-[clamp(280px,34vw,420px)] ${
-            side === "left"
-              ? "-left-[100px] rotate-180 sm:-left-[115px]"
-              : "-right-[100px] sm:-right-[115px]"
-          }`}
-        />
-      ))}
+      {flowers.map(({ top, side }, index) =>
+        side === "right" ? (
+          <img
+            key={index}
+            src="/florals/rose-vertical.png"
+            alt=""
+            style={{ top }}
+            className="absolute right-0 w-[190px] max-w-none -translate-y-1/2 select-none sm:w-[clamp(210px,20vw,280px)]"
+          />
+        ) : (
+          <img
+            key={index}
+            src="/florals/rose-corner.webp"
+            alt=""
+            style={{ top }}
+            className="absolute -left-[100px] w-[250px] max-w-none -translate-y-1/2 rotate-180 select-none sm:-left-[115px] sm:w-[clamp(280px,34vw,420px)]"
+          />
+        ),
+      )}
     </div>
   );
 }
